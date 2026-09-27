@@ -1,7 +1,7 @@
 from treasure import find_treasure
 from treasure import update_score
 from treasure import save_treasure
-
+from treasure import save_history
 
 locations = [
     "Forest",
@@ -84,6 +84,7 @@ def choose_area(selected_location):
 
 def search_location(
     player_id,
+    player_name,
     selected_location,
     selected_area
 ):
@@ -108,4 +109,12 @@ def search_location(
     update_score(
         player_id,
         points
+    )
+
+    save_history(
+    player_id,
+    player_name,
+    selected_location,
+    points,
+    treasure_name
     )
