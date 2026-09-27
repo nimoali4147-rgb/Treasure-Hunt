@@ -96,4 +96,4 @@ Treasure-Hunt/
 
 Nimo Ali
 
-Software Engineering Student
+Software Engineering 
