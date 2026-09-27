@@ -2,6 +2,7 @@ from database import get_connect
 from database import create_player_table
 from game import choose_location
 from game import choose_area
+from game import search_location
 
 
 def add_player(first_name, last_name):
@@ -47,9 +48,10 @@ def start_game():
 
     print("\nWelcome,", full_name + "!")
 
-    selected_location = choose_location()
+selected_location = choose_location()
 
-    choose_area(selected_location)
+selected_area = choose_area(selected_location)
+search_location(selected_area)
 
 
 def main():
