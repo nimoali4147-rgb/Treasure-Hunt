@@ -2,11 +2,10 @@ from database import get_connect
 from database import create_tables
 from database import add_locations
 from database import add_treasures  
-
-
 from game import choose_location
 from game import choose_area
 from game import search_location
+from treasure import get_score
 
 
 def add_player(first_name, last_name):
@@ -26,6 +25,40 @@ def add_player(first_name, last_name):
 
     return player_id
 
+def main_menu(player_id):
+    while True:
+        print("\nWhat would you like to do?")
+        print("1. Explore another location")
+        print("2. View my score")
+        print("3. Exit")
+
+        choice = input("Choose: ")
+
+        if choice == "1":
+            selected_location = choose_location()
+
+            selected_area = choose_area(
+                selected_location
+            )
+
+            search_location(
+                player_id,
+                selected_location,
+                selected_area
+            )
+
+        elif choice == "2":
+            score = get_score(player_id)
+
+            print("\nMY SCORE")
+            print("Current Score:", score)
+
+        elif choice == "3":
+            print("\nThanks for playing Treasure Hunt!")
+            break
+
+        else:
+            print("\nInvalid choice.")
 
 def start_game():
 
@@ -66,6 +99,7 @@ def start_game():
         selected_area
     )
 
+    main_menu(player_id)
 
 def main():
 
