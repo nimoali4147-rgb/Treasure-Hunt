@@ -6,6 +6,8 @@ from game import choose_location
 from game import choose_area
 from game import search_location
 from treasure import get_score
+from treasure import get_score
+from treasure import show_treasures
 
 
 def add_player(first_name, last_name):
@@ -25,12 +27,13 @@ def add_player(first_name, last_name):
 
     return player_id
 
-def main_menu(player_id):
+def main_menu(player_id,  full_name):
     while True:
         print("\nWhat would you like to do?")
         print("1. Explore another location")
-        print("2. View my score")
-        print("3. Exit")
+        print("2. View my treasures")
+        print("3. View my score")
+        print("4. Exit")
 
         choice = input("Choose: ")
 
@@ -40,20 +43,25 @@ def main_menu(player_id):
             selected_area = choose_area(
                 selected_location
             )
-
+    
             search_location(
                 player_id,
+                full_name,
                 selected_location,
                 selected_area
             )
 
         elif choice == "2":
+            show_treasures(player_id)
+
+        elif choice == "3":
             score = get_score(player_id)
 
             print("\nMY SCORE")
             print("Current Score:", score)
 
-        elif choice == "3":
+        elif choice == "4":
+            print("\nGAME OVER")
             print("\nThanks for playing Treasure Hunt!")
             break
 
@@ -95,11 +103,12 @@ def start_game():
 
     search_location(
         player_id,
+        full_name,
         selected_location,
         selected_area
     )
 
-    main_menu(player_id)
+    main_menu(player_id, full_name)
 
 def main():
 
