@@ -1,5 +1,9 @@
 from database import get_connect
-from database import create_player_table
+from database import create_tables
+from database import add_locations
+from database import add_treasures  
+
+
 from game import choose_location
 from game import choose_area
 from game import search_location
@@ -31,7 +35,9 @@ def start_game():
 
     while first_name == "":
         print("First name cannot be empty.")
-        first_name = input("Enter your first name: ").strip()
+        first_name = input(
+            "Enter your first name: "
+        ).strip()
 
     last_name = input("Enter your last name: ").strip()
 
@@ -46,16 +52,27 @@ def start_game():
 
     full_name = first_name + " " + last_name
 
-    print("\nWelcome,", full_name + "!")
+    print("\nWelcome,", full_name )
 
-selected_location = choose_location()
+    selected_location = choose_location()
 
-selected_area = choose_area(selected_location)
-search_location(selected_area)
+    selected_area = choose_area(
+        selected_location
+    )
+
+    search_location(
+        player_id,
+        selected_location,
+        selected_area
+    )
 
 
 def main():
-    create_player_table()
+
+    create_tables()
+    add_locations()
+    add_treasures()
+
     start_game()
 
 
