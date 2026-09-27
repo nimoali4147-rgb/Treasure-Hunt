@@ -1,4 +1,7 @@
 from treasure import find_treasure
+from treasure import update_score
+from treasure import save_treasure
+
 
 locations = [
     "Forest",
@@ -6,6 +9,7 @@ locations = [
     "Island",
     "Desert"
 ]
+
 
 areas = {
     "Forest": [
@@ -34,22 +38,17 @@ areas = {
 }
 
 
-
-def get_number(message):
+def get_number(number):
 
     while True:
 
-        choice = input(message)
+        choice = input(number)
 
         if choice.isdigit():
 
             choice = int(choice)
-
-            if 1 <= choice <= 4:
-                return choice
-
-        print("Invalid choice. Please enter a number from 1 to 4.")
-
+            
+            return choice
 
 def choose_location():
 
@@ -58,35 +57,55 @@ def choose_location():
     for i, location in enumerate(locations, start=1):
         print(i, location)
 
-    choice = get_number("Choose a location (1-4): ")
-
+    choice = get_number(
+        "Choose a location (1-4): ")
     selected_location = locations[choice - 1]
 
-    print("\nSelected Location:", selected_location)
+    print("\nYou entered the", selected_location)
 
     return selected_location
 
+
 def choose_area(selected_location):
 
-    print("\nWhere do you want to search?")
+    print("\nChoose an area to search:")
 
-    location_areas = areas[selected_location]
+    selected_areas = areas[selected_location]
 
-    for i, area in enumerate(location_areas, start=1):
+    for i, area in enumerate(selected_areas, start=1):
         print(i, area)
 
-    choice = get_number("Choose a place (1-3): ")
+    choice = get_number("Choose an area (1-3): ")
 
-    selected_area = location_areas[choice - 1]
-
-    print("\nSearching the", selected_area)
+    selected_area = selected_areas[choice - 1]
 
     return selected_area
 
-def search_location(selected_area):
-    print("\nSearching the", selected_area)
+
+def search_location(
+    player_id,
+    selected_location,
+    selected_area
+):
+
+    print("\nYou searched the", selected_area, "of the", selected_location)
 
     treasure = find_treasure()
 
-    print("You found:", treasure[1])
-    print("Points:", treasure[2])
+    treasure_id = treasure[0]
+    treasure_name = treasure[1]
+    points = treasure[2]
+
+    print("\nYou found a treasure!")
+    print("Treasure:", treasure_name)
+    print("Points: +", points)
+
+    save_treasure(
+        player_id,
+        treasure_id
+    )
+
+    update_score(
+        player_id,
+        points
+    )
