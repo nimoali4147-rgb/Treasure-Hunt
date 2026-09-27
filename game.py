@@ -1,3 +1,5 @@
+from treasure import find_treasure
+
 locations = [
     "Forest",
     "Cave",
@@ -73,12 +75,18 @@ def choose_area(selected_location):
     for i, area in enumerate(location_areas, start=1):
         print(i, area)
 
-    choice = get_number(
-        "Choose a place (1-3): ")
+    choice = get_number("Choose a place (1-3): ")
 
     selected_area = location_areas[choice - 1]
 
-    print("\nSearching the", selected_area + "...")
+    print("\nSearching the", selected_area)
 
     return selected_area
 
+def search_location(selected_area):
+    print("\nSearching the", selected_area)
+
+    treasure = find_treasure()
+
+    print("You found:", treasure[1])
+    print("Points:", treasure[2])
