@@ -90,3 +90,10 @@ Treasure-Hunt/
 ├── api.py
 ├── treasure_hunt.db
 └── README.md
+
+
+👩‍💻 Author
+
+Nimo Ali
+
+Software Engineering Student
